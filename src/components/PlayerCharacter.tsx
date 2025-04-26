@@ -82,7 +82,7 @@ export const PlayerCharacter = ({ movePlayer }: PlayerProps) => {
   return (
     <pixiSprite
       ref={spriteRef}
-      anchor={0.5}
+      anchor={{x: 0.5, y: 1}}
       eventMode={"static"}
       texture={texture}
       scale={1.5}
