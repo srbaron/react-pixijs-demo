@@ -8,7 +8,7 @@ export const GAME_HEIGHT = TILE_SIZE * TOTAL_ROWS;
 export const DEFAULT_X_POS = 250;
 export const DEFAULT_Y_POS = 260;
 
-export const PLAYER_MOVE_SPEED = 0.4;
+export const PLAYER_MOVE_SPEED = 0.275;
 
 export const CAMERA_ZOOM = 1.5;
 

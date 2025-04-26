@@ -82,13 +82,12 @@ export const PlayerCharacter = ({ movePlayer }: PlayerProps) => {
   return (
     <pixiSprite
       ref={spriteRef}
-      anchor={{x: 0.5, y: 1}}
+      anchor={{ x: 0.5, y: 1 }}
       eventMode={"static"}
       texture={texture}
       scale={1.5}
       x={position.current.x}
       y={position.current.y}
-      cursor='pointer'
     />
   );
 };

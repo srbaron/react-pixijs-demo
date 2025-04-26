@@ -7,6 +7,7 @@ import { useCallback, useState } from "react";
 import { Canvas, Position } from "./types";
 import { Camera } from "./components/Camera";
 import { Level1 } from "./components/Level1/Level1";
+import { Chest } from "./components/Items/Chest";
 
 extend({
   Container,
@@ -35,6 +36,7 @@ const App = () => {
       <Application width={canvas.width} height={canvas.height}>
         <Camera playerPos={playerPos} canvasSize={canvas}>
           <Level1 />
+          <Chest />
           <PlayerCharacter movePlayer={updatePlayerPos} />
         </Camera>
       </Application>
