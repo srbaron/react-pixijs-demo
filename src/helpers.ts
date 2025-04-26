@@ -1,4 +1,4 @@
-import { DirectionEnum, TILE_SIZE } from "./constants";
+import { DirectionEnum, TILE_SIZE, TOTAL_COLS } from "./constants";
 import { Position } from "./types";
 
 export const handleMovement = (
@@ -69,4 +69,24 @@ export const calculateNewTarget = (
           ? TILE_SIZE
           : 0),
   };
+};
+
+export const checkCollisions = (target: Position, collisionMap: number[]) => {
+  const row = Math.floor(target.y / TILE_SIZE);
+  const col = Math.floor(target.x / TILE_SIZE);
+  const index = TOTAL_COLS * row + col;
+
+  if (index < 0 || index >= collisionMap.length) {
+    return false;
+  }
+  console.table({
+    x: target.x,
+    y: target.y,
+    row,
+    col,
+    index,
+    colValue: collisionMap[index],
+  });
+
+  return collisionMap[index] !== 1;
 };

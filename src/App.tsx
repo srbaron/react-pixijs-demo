@@ -1,12 +1,12 @@
 import { Application, extend } from "@pixi/react";
 import { Container, Graphics, Sprite } from "pixi.js";
-import { Level1 } from "./components/Level1";
 import { GAME_HEIGHT, GAME_WIDTH, TILE_SIZE } from "./constants";
 import styled from "styled-components";
 import { PlayerCharacter } from "./components/PlayerCharacter";
 import { useCallback, useState } from "react";
 import { Canvas, Position } from "./types";
 import { Camera } from "./components/Camera";
+import { Level1 } from "./components/Level1/Level1";
 
 extend({
   Container,

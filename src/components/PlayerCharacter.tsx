@@ -9,7 +9,12 @@ import {
   DirectionEnum,
   PLAYER_MOVE_SPEED,
 } from "../constants";
-import { calculateNewTarget, handleMovement } from "../helpers";
+import {
+  calculateNewTarget,
+  checkCollisions,
+  handleMovement,
+} from "../helpers";
+import { collisionMap1 } from "./Level1/collisionMap1";
 
 interface PlayerProps {
   movePlayer: (gridX: number, gridY: number) => void;
@@ -34,7 +39,10 @@ export const PlayerCharacter = ({ movePlayer }: PlayerProps) => {
     const { x, y } = position.current;
     currentDirection.current = direction;
     const newTarget = calculateNewTarget(x, y, direction);
-    targetPosition.current = newTarget;
+
+    if (checkCollisions(newTarget, collisionMap1)) {
+      targetPosition.current = newTarget;
+    }
   }, []);
 
   useTick((ticker) => {
@@ -77,7 +85,7 @@ export const PlayerCharacter = ({ movePlayer }: PlayerProps) => {
       anchor={0.5}
       eventMode={"static"}
       texture={texture}
-      scale={2}
+      scale={1.5}
       x={position.current.x}
       y={position.current.y}
     />
