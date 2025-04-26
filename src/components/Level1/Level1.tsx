@@ -1,6 +1,6 @@
 import { Assets, Texture } from "pixi.js";
 import { useEffect, useRef, useState } from "react";
-import level1 from "../../assets/tilemap1.png";
+import level1 from "../../assets/tilemap-update.png";
 import { GAME_HEIGHT, GAME_WIDTH } from "../../constants";
 
 export const Level1 = () => {

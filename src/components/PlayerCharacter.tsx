@@ -1,6 +1,6 @@
 import { Assets, Texture } from "pixi.js";
 import { useCallback, useEffect, useRef, useState } from "react";
-import player from "../assets/playertexture2.png";
+import player from "../assets/indy2.png";
 import { useTick } from "@pixi/react";
 import { usePlayerMovement } from "./hooks/usePlayerMovement";
 import {
@@ -88,6 +88,7 @@ export const PlayerCharacter = ({ movePlayer }: PlayerProps) => {
       scale={1.5}
       x={position.current.x}
       y={position.current.y}
+      cursor='pointer'
     />
   );
 };
