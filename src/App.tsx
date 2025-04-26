@@ -1,11 +1,10 @@
+import { Application } from '@pixi/react'
 
-const App = () => {
+const App = () => (
+  <Application>
 
-  return (
-    <div>
-      <h1>New App!</h1>
-    </div>
-  )
-}
+  </Application>
+)
+
 
 export default App
