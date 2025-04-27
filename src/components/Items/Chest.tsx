@@ -36,10 +36,10 @@ export const Chest = () => {
       anchor={{ x: 0.5, y: 1 }}
       eventMode={"static"}
       texture={texture}
-      scale={0.75}
+      scale={1.3}
       onClick={onOpenChest}
-      x={250}
-      y={200}
+      x={500}
+      y={400}
       cursor="pointer"
     />
   );
