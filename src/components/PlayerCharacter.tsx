@@ -1,6 +1,4 @@
-import { Assets, Texture } from "pixi.js";
-import { useCallback, useEffect, useRef, useState } from "react";
-import player from "../assets/indy2.png";
+import { useCallback, useEffect, useRef } from "react";
 import { useTick } from "@pixi/react";
 import { usePlayerMovement } from "./hooks/usePlayerMovement";
 import {
@@ -15,6 +13,7 @@ import {
   handleMovement,
 } from "../helpers";
 import { collisionMap1 } from "./Level1/collisionMap1";
+import { usePlayerAnimation } from "./hooks/usePlayerAnimation";
 
 interface PlayerProps {
   movePlayer: (gridX: number, gridY: number) => void;
@@ -27,8 +26,9 @@ export const PlayerCharacter = ({ movePlayer }: PlayerProps) => {
   const spriteRef = useRef(null);
   const isMoving = useRef(false);
 
-  const [texture, setTexture] = useState(Texture.EMPTY);
   const { getDirectionEnum } = usePlayerMovement();
+  const dir = getDirectionEnum();
+  const texture = usePlayerAnimation(dir);
 
   useEffect(() => {
     movePlayer(position.current.x, position.current.y);
@@ -71,21 +71,13 @@ export const PlayerCharacter = ({ movePlayer }: PlayerProps) => {
     }
   });
 
-  useEffect(() => {
-    if (texture === Texture.EMPTY) {
-      Assets.load(player).then((result) => {
-        setTexture(result);
-      });
-    }
-  }, [texture]);
-
   return (
     <pixiSprite
       ref={spriteRef}
       anchor={{ x: 0.5, y: 1 }}
       eventMode={"static"}
       texture={texture}
-      scale={2}
+      scale={1.5}
       x={position.current.x}
       y={position.current.y}
     />
