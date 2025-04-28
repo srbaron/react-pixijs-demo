@@ -1,6 +1,6 @@
 import { Application, extend } from "@pixi/react";
-import { Container, Graphics, Sprite, TextStyle, Text } from "pixi.js";
-import { GAME_HEIGHT, GAME_WIDTH, TILE_SIZE } from "./constants";
+import { Container, Graphics, Sprite, Text } from "pixi.js";
+import { GAME_HEIGHT, GAME_WIDTH, ScenesEnum, TILE_SIZE } from "./constants";
 import styled from "styled-components";
 import { PlayerCharacter } from "./components/PlayerCharacter";
 import { useCallback, useState } from "react";
@@ -8,6 +8,7 @@ import { Canvas, Position } from "./types";
 import { Camera } from "./components/Camera";
 import { Level1 } from "./components/Level1/Level1";
 import { Chest } from "./components/Items/Chest";
+import { Menu } from "./components/Menu";
 
 extend({
   Container,
@@ -22,19 +23,6 @@ const Center = styled.div`
   justify-content: center;
 `;
 
-enum ScenesEnum {
-  MAIN_MENU = "MAIN_MENU",
-  GAME = "GAME",
-}
-
-const textStyle = new TextStyle({
-  fontFamily: "Arial",
-  fontSize: 36,
-  fontStyle: "italic",
-  fontWeight: "bold",
-  fill: "#FFFFFF",
-  stroke: { color: "#4a1850", width: 5, join: "round" },
-});
 
 const App = () => {
   const [playerPos, setPlayerPos] = useState<Position>({ x: 0, y: 0 });
@@ -51,23 +39,10 @@ const App = () => {
 
   return (
     <>
-      <div>
-        <button onClick={() => setCurrentScene(ScenesEnum.GAME)}>
-          Swap to Game
-        </button>
-        <button onClick={() => setCurrentScene(ScenesEnum.MAIN_MENU)}>
-          Swap to Menu
-        </button>
-      </div>
       <Center>
         <Application width={canvas.width} height={canvas.height}>
           {currentScene === ScenesEnum.MAIN_MENU ? (
-            <pixiText
-              text="PLAY GAME"
-              x={GAME_WIDTH / 2}
-              y={GAME_HEIGHT / 2}
-              style={textStyle}
-            />
+            <Menu setCurrentScene={setCurrentScene} />
           ) : null}
           {currentScene === ScenesEnum.GAME ? (
             <Camera playerPos={playerPos} canvasSize={canvas}>

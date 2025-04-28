@@ -1,0 +1,69 @@
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react"
+import { GAME_HEIGHT, GAME_WIDTH, ScenesEnum } from "../constants"
+import { Assets, Texture } from "pixi.js";
+import menuBg from "../assets/menuBg.png";
+import title from "../assets/title.png";
+import start from "../assets/start.png";
+import startHover from "../assets/startHover.png";
+
+interface MenuProps {
+    setCurrentScene: Dispatch<SetStateAction<ScenesEnum>>
+}
+
+export const Menu = ({ setCurrentScene }: MenuProps) => {
+    const spriteRef = useRef(null);
+    const [texture, setTexture] = useState(Texture.EMPTY);
+    const [startText, setStartText] = useState(Texture.EMPTY);
+    const [startHoverText, setStartHoverText] = useState(Texture.EMPTY);
+    const [titleText, setTitleText] = useState(Texture.EMPTY);
+    const [isHovering, setIsHovering] = useState(false)
+
+    // Preload the sprite if it hasn't been loaded yet
+    useEffect(() => {
+        Assets.load(menuBg).then((result) => {
+            setTexture(result);
+        });
+        Assets.load(title).then((result) => {
+            setTitleText(result);
+        });
+        Assets.load(start).then((result) => {
+            setStartText(result);
+        });
+        Assets.load(startHover).then((result) => {
+            setStartHoverText(result);
+        });
+    }, [texture]);
+    return (
+        <>
+            <pixiSprite
+                ref={spriteRef}
+                eventMode={"static"}
+                texture={texture}
+                width={GAME_WIDTH}
+                height={GAME_HEIGHT}
+            />
+            <pixiContainer x={120} y={240}>
+                <pixiSprite
+                    ref={spriteRef}
+                    eventMode={"static"}
+                    texture={titleText}
+                    width={600}
+                    height={200}
+                />
+                <pixiSprite
+                    ref={spriteRef}
+                    eventMode={"static"}
+                    texture={isHovering ? startHoverText : startText}
+                    width={600}
+                    height={200}
+                    y={150}
+                    onClick={() => setCurrentScene(ScenesEnum.GAME)}
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                    cursor={'pointer'}
+                />
+            </pixiContainer>
+        </>
+        
+    );
+}
