@@ -9,7 +9,7 @@ export const Chest = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    if (texture === Texture.EMPTY) {
+    if (!isOpen) {
       Assets.load(chest).then((result) => {
         setTexture(result);
       });
@@ -23,10 +23,11 @@ export const Chest = () => {
 
   const onOpenChest = () => {
     if (isOpen) {
-      alert("Item already received...");
+      setIsOpen(false);
+      console.log("Item already received...");
     } else {
       setIsOpen(true);
-      alert("Received amazing new item!");
+      console.log("Received amazing new item!");
     }
   };
 

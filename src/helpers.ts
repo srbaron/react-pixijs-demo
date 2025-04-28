@@ -1,7 +1,7 @@
 import { sound } from "@pixi/sound";
 import { DirectionEnum, TILE_SIZE, TOTAL_COLS } from "./constants";
 import { Position } from "./types";
-import titleTheme from "./assets/SML_overworld.mp3"
+import titleTheme from "./assets/SML_overworld.mp3";
 
 export const handleMovement = (
   currentPosition: Position,
@@ -95,19 +95,17 @@ export const checkCollisions = (target: Position, collisionMap: number[]) => {
 
 export const loadSound = async () => {
   try {
-    await sound.add('title', titleTheme);
-    console.log('Sound loaded successfully');
+    await sound.add("title", titleTheme);
+    console.log("Sound loaded successfully");
   } catch (error) {
-    console.error('Error loading sound:', error);
+    console.error("Error loading sound:", error);
   }
 };
 
 export const playSound = () => {
-  if (sound.exists('title')) {
-    sound.play('title', {volume: 0.01, loop: true});
+  if (sound.exists("title")) {
+    sound.play("title", { volume: 0.01, loop: true });
   } else {
     console.warn('Sound "title" not found.');
   }
 };
-
-

@@ -24,7 +24,6 @@ const Center = styled.div`
   justify-content: center;
 `;
 
-
 const App = () => {
   const [playerPos, setPlayerPos] = useState<Position>({ x: 0, y: 0 });
   const [currentScene, setCurrentScene] = useState<ScenesEnum>(
