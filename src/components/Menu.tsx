@@ -10,6 +10,9 @@ interface MenuProps {
     setCurrentScene: Dispatch<SetStateAction<ScenesEnum>>
 }
 
+const TEXT_X_POS = 600;
+const TEXT_Y_POS = 200;
+
 export const Menu = ({ setCurrentScene }: MenuProps) => {
     const spriteRef = useRef(null);
     const [texture, setTexture] = useState(Texture.EMPTY);
@@ -33,6 +36,7 @@ export const Menu = ({ setCurrentScene }: MenuProps) => {
             setStartHoverText(result);
         });
     }, [texture]);
+
     return (
         <>
             <pixiSprite
@@ -47,15 +51,15 @@ export const Menu = ({ setCurrentScene }: MenuProps) => {
                     ref={spriteRef}
                     eventMode={"static"}
                     texture={titleText}
-                    width={600}
-                    height={200}
+                    width={TEXT_X_POS}
+                    height={TEXT_Y_POS}
                 />
                 <pixiSprite
                     ref={spriteRef}
                     eventMode={"static"}
                     texture={isHovering ? startHoverText : startText}
-                    width={600}
-                    height={200}
+                    width={TEXT_X_POS}
+                    height={TEXT_Y_POS}
                     y={150}
                     onClick={() => setCurrentScene(ScenesEnum.GAME)}
                     onMouseEnter={() => setIsHovering(true)}

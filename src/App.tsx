@@ -3,12 +3,13 @@ import { Container, Graphics, Sprite, Text } from "pixi.js";
 import { GAME_HEIGHT, GAME_WIDTH, ScenesEnum, TILE_SIZE } from "./constants";
 import styled from "styled-components";
 import { PlayerCharacter } from "./components/PlayerCharacter";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Canvas, Position } from "./types";
 import { Camera } from "./components/Camera";
 import { Level1 } from "./components/Level1/Level1";
 import { Chest } from "./components/Items/Chest";
 import { Menu } from "./components/Menu";
+import { loadSound, playSound } from "./helpers";
 
 extend({
   Container,
@@ -35,6 +36,15 @@ const App = () => {
       x: Math.floor(x / TILE_SIZE),
       y: Math.floor(y / TILE_SIZE),
     });
+  }, []);
+
+  useEffect(() => {
+    const setup = async () => {
+      await loadSound();
+      playSound();
+    };
+
+    setup();
   }, []);
 
   return (
