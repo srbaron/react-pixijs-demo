@@ -54,8 +54,6 @@ export const Menu = ({ setCurrentScene }: MenuProps) => {
 
   useTick((ticker) => animateText(ticker));
 
-  console.log(yPos);
-
   return (
     <>
       <pixiSprite

@@ -9,7 +9,8 @@ import { Camera } from "./components/Camera";
 import { Level1 } from "./components/Level1/Level1";
 import { Chest } from "./components/Items/Chest";
 import { Menu } from "./components/Menu";
-import { loadSound, playSound } from "./helpers";
+import { loadSound, playSound, toggleSound } from "./helpers";
+import { PropertiesBar } from "./components/PropertiesBar";
 
 extend({
   Container,
@@ -22,6 +23,29 @@ const Center = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const StyledButton = styled.button`
+  padding: 12px 24px;
+  color: black;
+  background-color: white;
+  cursor: pointer;
+  border: 3px solid black;
+  border-radius: 6px;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: 16px;
+  background-color: #eaeaf8;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 12px;
+
+  & > button {
+    margin: 0 3px;
+  }
 `;
 
 const App = () => {
@@ -48,6 +72,15 @@ const App = () => {
 
   return (
     <>
+      <ButtonWrapper>
+        <StyledButton onClick={() => setCurrentScene(ScenesEnum.MAIN_MENU)}>
+          MAIN MENU
+        </StyledButton>
+        <StyledButton onClick={() => setCurrentScene(ScenesEnum.GAME)}>
+          GAME
+        </StyledButton>
+        <StyledButton onClick={toggleSound}>MUTE</StyledButton>
+      </ButtonWrapper>
       <Center>
         <Application width={canvas.width} height={canvas.height}>
           {currentScene === ScenesEnum.MAIN_MENU ? (
@@ -61,6 +94,7 @@ const App = () => {
             </Camera>
           ) : null}
         </Application>
+        <PropertiesBar />
       </Center>
     </>
   );

@@ -109,3 +109,11 @@ export const playSound = () => {
     console.warn('Sound "title" not found.');
   }
 };
+
+export const toggleSound = () => {
+  if (sound.exists("title")) {
+    sound.togglePauseAll();
+  } else {
+    console.warn('Sound "title" not found.');
+  }
+};
