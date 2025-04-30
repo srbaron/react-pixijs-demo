@@ -21,6 +21,7 @@
 - ticker to control elements over time
 - scene management
 - custom PIXI hooks using React
+- React 19 context for game properties
 
 ## CONCEPTS TO LEARN/UNDERSTAND MORE
 
