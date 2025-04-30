@@ -7,3 +7,9 @@ export interface Canvas {
   width: number;
   height: number;
 }
+
+export interface GameProperties {
+  zoomScale: number;
+  speedScale: number;
+  volume: number;
+}

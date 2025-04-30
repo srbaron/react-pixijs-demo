@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, use } from "react";
 import { useTick } from "@pixi/react";
 import { usePlayerMovement } from "./hooks/usePlayerMovement";
 import {
@@ -14,12 +14,16 @@ import {
 } from "../helpers";
 import { collisionMap1 } from "./Level1/collisionMap1";
 import { usePlayerAnimation } from "./hooks/usePlayerAnimation";
+import { GamePropertyContext } from "./GamePropertyProvider";
 
 interface PlayerProps {
   movePlayer: (gridX: number, gridY: number) => void;
 }
 
 export const PlayerCharacter = ({ movePlayer }: PlayerProps) => {
+  const context = use(GamePropertyContext);
+  const playerSpeedScale = context ? context.properties.speedScale : 1;
+
   const position = useRef({ x: DEFAULT_X_POS, y: DEFAULT_Y_POS });
   const targetPosition = useRef<{ x: number; y: number } | null>(null);
   const currentDirection = useRef<DirectionEnum | null>(null);
@@ -54,7 +58,7 @@ export const PlayerCharacter = ({ movePlayer }: PlayerProps) => {
       const { position: newPosition, completed } = handleMovement(
         position.current,
         targetPosition.current,
-        PLAYER_MOVE_SPEED,
+        PLAYER_MOVE_SPEED * playerSpeedScale,
         ticker.deltaTime,
       );
 

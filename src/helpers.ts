@@ -117,3 +117,11 @@ export const toggleSound = () => {
     console.warn('Sound "title" not found.');
   }
 };
+
+export const setVolume = (volume: number) => {
+  if (sound.exists("title")) {
+    sound.volume("title", volume);
+  } else {
+    console.warn('Sound "title" not found.');
+  }
+};

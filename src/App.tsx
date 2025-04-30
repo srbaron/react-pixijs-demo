@@ -11,6 +11,8 @@ import { Chest } from "./components/Items/Chest";
 import { Menu } from "./components/Menu";
 import { loadSound, playSound, toggleSound } from "./helpers";
 import { PropertiesBar } from "./components/PropertiesBar";
+import "./style.css";
+import { GamePropertyProvider } from "./components/GamePropertyProvider";
 
 extend({
   Container,
@@ -25,16 +27,18 @@ const Center = styled.div`
   justify-content: center;
 `;
 
-export const StyledButton = styled.button`
+export const StyledButton = styled.button<{ $isMuted?: boolean }>`
+  font-weight: bold;
   padding: 12px 24px;
   color: black;
   background-color: white;
   cursor: pointer;
   border: 3px solid black;
   border-radius: 6px;
-  font-family: "Pixelify Sans", sans-serif;
-  font-size: 16px;
-  background-color: #eaeaf8;
+  font-family: "Jersey 25", sans-serif;
+  font-size: 24px;
+  background-color: ${(props) => (props.$isMuted ? "#ffb3b3" : "#eaeaf8")};
+  text-decoration: ${(props) => (props.$isMuted ? "line-through" : "none")};
 `;
 
 const ButtonWrapper = styled.div`
@@ -60,6 +64,7 @@ const App = () => {
       y: Math.floor(y / TILE_SIZE),
     });
   }, []);
+  const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
     const setup = async () => {
@@ -70,8 +75,13 @@ const App = () => {
     setup();
   }, []);
 
+  const muteAudio = () => {
+    setIsMuted(!isMuted);
+    toggleSound();
+  };
+
   return (
-    <>
+    <GamePropertyProvider>
       <ButtonWrapper>
         <StyledButton onClick={() => setCurrentScene(ScenesEnum.MAIN_MENU)}>
           MAIN MENU
@@ -79,7 +89,9 @@ const App = () => {
         <StyledButton onClick={() => setCurrentScene(ScenesEnum.GAME)}>
           GAME
         </StyledButton>
-        <StyledButton onClick={toggleSound}>MUTE</StyledButton>
+        <StyledButton $isMuted={isMuted} onClick={muteAudio}>
+          MUTE
+        </StyledButton>
       </ButtonWrapper>
       <Center>
         <Application width={canvas.width} height={canvas.height}>
@@ -96,7 +108,7 @@ const App = () => {
         </Application>
         <PropertiesBar />
       </Center>
-    </>
+    </GamePropertyProvider>
   );
 };
 
